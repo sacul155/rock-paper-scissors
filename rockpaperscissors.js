@@ -9,50 +9,74 @@ function getComputerChoice() {
     return compChoice;
 }
 
+/*
 function getHumanChoice() {
     let humanChoice = prompt("Rock, paper, or scissors?").toLowerCase();
     if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
         return humanChoice;
     } else return "invalid";
 }
+*/
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
+    let computerChoice = getComputerChoice();
+
+const rockbtn = document.createElement("button");
+rockbtn.textContent = "Rock";
+document.body.appendChild(rockbtn);
+rockbtn.addEventListener("click", () => {playRound("rock", computerChoice)});
+
+const paperbtn = document.createElement("button");
+paperbtn.textContent = "Paper";
+document.body.appendChild(paperbtn);
+paperbtn.addEventListener("click", () => {playRound("paper", computerChoice)});
+
+const scissorsbtn = document.createElement("button");
+scissorsbtn.textContent = "Scissors";
+document.body.appendChild(scissorsbtn);
+scissorsbtn.addEventListener("click", () => {playRound("scissors", computerChoice)});
 
     function playRound(humanChoice, computerChoice) {
         console.log("Your choice was " + humanChoice);
         console.log("Computer's choice was " + computerChoice);
         if (humanChoice === computerChoice) {
             console.log("tie");
+            console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
         } else if (humanChoice === "rock") {
             if (computerChoice === "paper") {
                 console.log("You lose");
                 computerScore += 1;
+                console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
             } else if (computerChoice === "scissors") {
                 console.log("You win");
                 humanScore += 1;
+                console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
             }
         } else if (humanChoice === "paper") {
             if (computerChoice === "rock") {
                 console.log("You win");
                 humanScore += 1;
+                console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
             } else if (computerChoice === "scissors") {
                 console.log("You lose");
                 computerScore += 1;
+                console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
             }
         } else if (humanChoice === "scissors") {
             if (computerChoice === "rock") {
                 console.log("You lose");
                 computerScore += 1;
+                console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
             } else if (computerChoice === "paper") {
                 console.log("You win");
                 humanScore += 1;
+                console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
             }
         } else console.log("No contest");
-        return "Your score " + humanScore + ", Computer score: " + computerScore;
     }
 
-    for (let i = 0; i < 5; i++) {
+ /*   for (let i = 0; i < 5; i++) {
         let humanSelection = getHumanChoice();
         let computerSelection = getComputerChoice();
 
@@ -72,6 +96,8 @@ function playGame() {
     } else {
         return "It's a tie but you still got no aura";
     }
+*/
+
 }
 
 console.log(playGame());
