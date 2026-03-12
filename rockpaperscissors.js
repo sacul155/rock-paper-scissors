@@ -1,4 +1,4 @@
-
+/* returns a random choice between rock, paper, and scissors with the Math.random() function */
 function getComputerChoice() {
     let compChoice = Math.random();
     if (compChoice <= 0.33) {
@@ -8,96 +8,73 @@ function getComputerChoice() {
     } else compChoice = "scissors";
     return compChoice;
 }
+/* variables globally declared so that they can update each time playGame() is called */
+let computerChoice = '';
+let humanScore = 0;
+let computerScore = 0;
 
-/*
-function getHumanChoice() {
-    let humanChoice = prompt("Rock, paper, or scissors?").toLowerCase();
-    if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
-        return humanChoice;
-    } else return "invalid";
+function playGame(humanChoice, computerChoice) {
+    /* computerChoice is first assigned for comparison; don't need to assign humanChoice b/c it's assigned
+    based on which button is clicked */
+    computerChoice = getComputerChoice();
+
+    /* At this point, both parameters computerChoice and humanChoice are known, so we print them to let the user
+    know their choice and the computer's */
+    console.log("Your choice was " + humanChoice);
+    console.log("Computer's choice was " + computerChoice);
+
+    /* Conditional statement that compares each player's choice and outputs tie, win, or lose to the console.
+    Also updates score variables based on winner and prints to console as well. */
+    if (humanChoice === computerChoice) {
+        console.log("tie");
+        console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
+    } else if (humanChoice === "rock") {
+        if (computerChoice === "paper") {
+            console.log("You lose");
+            computerScore += 1;
+            console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
+        } else if (computerChoice === "scissors") {
+            console.log("You win");
+            humanScore += 1;
+            console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
+        }
+    } else if (humanChoice === "paper") {
+        if (computerChoice === "rock") {
+            console.log("You win");
+            humanScore += 1;
+            console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
+        } else if (computerChoice === "scissors") {
+            console.log("You lose");
+            computerScore += 1;
+            console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
+        }
+    } else if (humanChoice === "scissors") {
+        if (computerChoice === "rock") {
+            console.log("You lose");
+            computerScore += 1;
+            console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
+        } else if (computerChoice === "paper") {
+            console.log("You win");
+            humanScore += 1;
+            console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
+        }
+     } else console.log("No contest");
 }
-*/
-function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    let computerChoice = getComputerChoice();
 
+/* Now that the function has been written, we need a way to call the function on command.  The following buttons
+are created and appended to HTML doc, then event listeners are added which call the playGame() function each time
+they are clicked. */
 const rockbtn = document.createElement("button");
 rockbtn.textContent = "Rock";
 document.body.appendChild(rockbtn);
-rockbtn.addEventListener("click", () => {playRound("rock", computerChoice)});
+rockbtn.addEventListener("click", () => {playGame("rock", computerChoice)});
 
 const paperbtn = document.createElement("button");
 paperbtn.textContent = "Paper";
 document.body.appendChild(paperbtn);
-paperbtn.addEventListener("click", () => {playRound("paper", computerChoice)});
+paperbtn.addEventListener("click", () => {playGame("paper", computerChoice)});
 
 const scissorsbtn = document.createElement("button");
 scissorsbtn.textContent = "Scissors";
 document.body.appendChild(scissorsbtn);
-scissorsbtn.addEventListener("click", () => {playRound("scissors", computerChoice)});
-
-    function playRound(humanChoice, computerChoice) {
-        console.log("Your choice was " + humanChoice);
-        console.log("Computer's choice was " + computerChoice);
-        if (humanChoice === computerChoice) {
-            console.log("tie");
-            console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
-        } else if (humanChoice === "rock") {
-            if (computerChoice === "paper") {
-                console.log("You lose");
-                computerScore += 1;
-                console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
-            } else if (computerChoice === "scissors") {
-                console.log("You win");
-                humanScore += 1;
-                console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
-            }
-        } else if (humanChoice === "paper") {
-            if (computerChoice === "rock") {
-                console.log("You win");
-                humanScore += 1;
-                console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
-            } else if (computerChoice === "scissors") {
-                console.log("You lose");
-                computerScore += 1;
-                console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
-            }
-        } else if (humanChoice === "scissors") {
-            if (computerChoice === "rock") {
-                console.log("You lose");
-                computerScore += 1;
-                console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
-            } else if (computerChoice === "paper") {
-                console.log("You win");
-                humanScore += 1;
-                console.log("Your score: " + humanScore + ", Computer score: " + computerScore);
-            }
-        } else console.log("No contest");
-    }
-
- /*   for (let i = 0; i < 5; i++) {
-        let humanSelection = getHumanChoice();
-        let computerSelection = getComputerChoice();
-
-        console.log(playRound(humanSelection, computerSelection));
-        if (i < 4) {
-            let again = prompt("Again? Type yes or no").toLowerCase();
-            if (again === "yes") {
-                continue;
-            } else return;
-        } else return;
-    }
-
-    if (humanScore > computerScore) {
-        return "You got aura twin";
-    } else if (computerScore > humanScore) {
-        return "you ain't got no aura twin";
-    } else {
-        return "It's a tie but you still got no aura";
-    }
-*/
-
-}
-
-console.log(playGame());
+scissorsbtn.addEventListener("click", () => {playGame("scissors", computerChoice)});
